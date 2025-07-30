@@ -1,72 +1,104 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const courses = document.querySelectorAll('.course');
-    const completedCourses = new Set(); // To store IDs of completed courses
+const cursos = [
+  // Formato: [nombre, semestre (0-indexed), requisitos (por nombre)]
+  ["Química General I", 0, []],
+  ["Laboratorio de Química General", 0, []],
+  ["Introducción a las Ciencias Farmacéuticas", 0, []],
+  ["Mundo de los Medicamentos", 0, []],
+  ["Precálculo", 0, []],
+  ["Filosofía: ¿Para Qué?", 0, []],
 
-    // Load saved state from localStorage
-    loadCourseState();
+  ["Química General II", 1, ["Química General I", "Laboratorio de Química General"]],
+  ["Física para Ciencias", 1, []],
+  ["Cálculo I", 1, ["Precálculo"]],
+  ["Electivo 1", 1, []],
+  ["Electivo 2", 1, []],
 
-    courses.forEach(course => {
-        // Check if the course is already completed from previous session
-        if (completedCourses.has(course.id)) {
-            course.classList.add('completed');
-            course.classList.remove('locked');
-        }
+  ["Química Orgánica I", 2, ["Química General II"]],
+  ["Botánica y Farmacognosia", 2, ["Mundo de los Medicamentos", "Química General II"]],
+  ["Estadística para Química y Farmacia", 2, ["Cálculo I"]],
+  ["Biología de la Célula", 2, []],
+  ["Electivo 3", 2, []],
 
-        // Initial check for locking/unlocking based on prerequisites
-        checkCourseLockStatus(course);
+  ["Química Orgánica II", 3, ["Química Orgánica I"]],
+  ["Química Analítica I", 3, ["Química General II", "Estadística para Química y Farmacia"]],
+  ["Fisiología", 3, ["Biología de la Célula"]],
+  ["Electivo Teológico", 3, []],
+  ["Electivo 4", 3, []],
 
-        course.addEventListener('click', () => {
-            // Only allow clicking if the course is not locked and not already completed
-            if (!course.classList.contains('locked') && !course.classList.contains('completed')) {
-                course.classList.add('completed');
-                completedCourses.add(course.id); // Add to completed set
-                saveCourseState(); // Save state
+  ["Laboratorio de Química Orgánica", 4, ["Química Orgánica II"]],
+  ["Bioquímica", 4, ["Química Orgánica II"]],
+  ["Química-Física", 4, ["Cálculo I", "Física para Ciencias", "Química General II"]],
+  ["Análisis Instrumental", 4, ["Química Analítica I"]],
+  ["Fisiopatología", 4, ["Fisiología"]],
 
-                // Unlock dependent courses
-                unlockDependentCourses(course.id);
-            }
-        });
+  ["Microbiología e Inmunología", 5, ["Fisiología", "Bioquímica"]],
+  ["Fármaco-Química I", 5, ["Laboratorio de Química Orgánica", "Química-Física"]],
+  ["Farmacocinética y Bio-farmacia", 5, ["Química-Física"]],
+  ["Farmacología I", 5, ["Fisiopatología", "Bioquímica"]],
+  ["Electivo 5", 5, []],
+
+  ["Fármaco-Química II", 6, ["Fármaco-Química I", "Farmacología I"]],
+  ["Tecnología Farmacéutica I", 6, ["Análisis Instrumental", "Farmacocinética y Bio-farmacia"]],
+  ["Farmacología II", 6, ["Farmacología I"]],
+  ["Bioquímica Clínica", 6, ["Bioquímica", "Fisiopatología", "Química-Física"]],
+  ["Electivo 6", 6, []],
+
+  ["Fármaco-Química III", 7, ["Fármaco-Química II"]],
+  ["Práctica Profesional II", 7, ["Fármaco-Química II", "Tecnología Farmacéutica II"]],
+  ["Internado Clínico", 7, ["Fármaco-Química II", "Farmacología III"]],
+  ["Farmacia Privada", 7, ["Fármaco-Química II"]],
+  ["Farmacia Clínica y Atención Farmacéutica", 7, ["Fármaco-Química I", "Farmacología II"]],
+  ["Tecnología Farmacéutica II", 7, ["Tecnología Farmacéutica I"]],
+  ["Práctica Profesional I", 7, ["Tecnología Farmacéutica I"]],
+  ["Toxicología", 7, []],
+  ["Tesis de grado", 7, []],
+
+  ["Farmacología III", 8, ["Farmacología II"]],
+  ["Optativo de Profundización 1", 8, []],
+  ["Fármaco-Química III", 8, ["Fármaco-Química II"]],
+  ["Legislación y Deontología Farmacéutica", 8, ["Fármaco-Química I"]],
+  ["Salud Pública para Química y Farmacia", 9, ["Farmacología I"]],
+  ["Optativo de Profundización 2", 9, []],
+  ["Optativo de Profundización 3", 9, []],
+];
+
+const malla = document.getElementById("malla");
+
+const estado = {};
+cursos.forEach(([nombre]) => (estado[nombre] = false));
+
+function actualizarHabilitados() {
+  cursos.forEach(([nombre, , requisitos]) => {
+    const curso = document.querySelector(`[data-nombre="${nombre}"]`);
+    const habilitado = requisitos.every(req => estado[req]);
+    curso.classList.toggle("habilitado", habilitado);
+  });
+}
+
+function crearMalla() {
+  const semestres = Array.from({ length: 10 }, (_, i) => {
+    const div = document.createElement("div");
+    div.classList.add("semestre");
+    div.innerHTML = `<h3>Semestre ${i + 1}</h3>`;
+    malla.appendChild(div);
+    return div;
+  });
+
+  cursos.forEach(([nombre, semestre]) => {
+    const div = document.createElement("div");
+    div.classList.add("curso");
+    div.textContent = nombre;
+    div.dataset.nombre = nombre;
+    div.addEventListener("click", () => {
+      if (!div.classList.contains("habilitado") && !estado[nombre]) return;
+      estado[nombre] = !estado[nombre];
+      div.classList.toggle("aprobado", estado[nombre]);
+      actualizarHabilitados();
     });
+    semestres[semestre].appendChild(div);
+  });
 
-    function checkCourseLockStatus(course) {
-        const prerequisites = course.dataset.prerequisites ? course.dataset.prerequisites.split(',') : [];
+  actualizarHabilitados();
+}
 
-        if (prerequisites.length > 0) {
-            const allPrerequisitesMet = prerequisites.every(prereqId => completedCourses.has(prereqId.trim()));
-            if (allPrerequisitesMet) {
-                course.classList.remove('locked');
-            } else {
-                course.classList.add('locked');
-            }
-        }
-    }
-
-    function unlockDependentCourses(completedCourseId) {
-        courses.forEach(course => {
-            const prerequisites = course.dataset.prerequisites ? course.dataset.prerequisites.split(',') : [];
-            if (prerequisites.includes(completedCourseId)) {
-                // If this course has the just-completed course as a prerequisite, re-check its lock status
-                checkCourseLockStatus(course);
-            }
-        });
-    }
-
-    function saveCourseState() {
-        localStorage.setItem('completedCourses', JSON.stringify(Array.from(completedCourses)));
-    }
-
-    function loadCourseState() {
-        const savedState = localStorage.getItem('completedCourses');
-        if (savedState) {
-            const savedCourseIds = JSON.parse(savedState);
-            savedCourseIds.forEach(id => completedCourses.add(id));
-        }
-    }
-
-    // After loading, iterate through all courses again to apply initial lock/unlock states
-    // This is important for courses that might be unlocked by multiple prerequisites
-    // and for cases where page is reloaded.
-    courses.forEach(course => {
-        checkCourseLockStatus(course);
-    });
-});
+crearMalla();
