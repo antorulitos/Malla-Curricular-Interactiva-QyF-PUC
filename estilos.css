@@ -1,1 +1,101 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+}
 
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+.curriculum-map {
+    display: flex;
+    flex-wrap: wrap; /* Allows years to wrap on smaller screens */
+    gap: 30px;
+    justify-content: center;
+}
+
+.year {
+    flex: 1; /* Allows years to take equal space */
+    min-width: 280px; /* Minimum width for each year column */
+    background-color: #e0e6de; /* Lighter green background for year */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.year h2 {
+    text-align: center;
+    color: #2c3e50; /* Darker color for year title */
+    margin-bottom: 20px;
+    border-bottom: 2px solid #95a98e;
+    padding-bottom: 10px;
+}
+
+.semester {
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #f2f7f0; /* Even lighter background for semester */
+    border-radius: 6px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.semester h3 {
+    color: #555;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.course {
+    background-color: #b0c0aa; /* Base course color */
+    color: #fff;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+}
+
+.course:last-child {
+    margin-bottom: 0;
+}
+
+.course:not(.completed):hover {
+    background-color: #95a98e; /* Darker green on hover for uncompleted */
+    transform: translateY(-2px);
+}
+
+.course.completed {
+    background-color: #4CAF50; /* A standard green for completed */
+    cursor: default;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.course.locked {
+    background-color: #cccccc; /* Grey for locked courses */
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none;
+}
+
+.course.locked:hover {
+    transform: none; /* No transform on hover for locked */
+}
