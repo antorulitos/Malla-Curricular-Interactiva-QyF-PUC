@@ -10,7 +10,7 @@ h1 {
   color: #3b4c3f;
 }
 
-.malla {
+.grid-container {
   display: flex;
   overflow-x: auto;
   gap: 20px;
