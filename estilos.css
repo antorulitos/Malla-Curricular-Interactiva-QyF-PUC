@@ -23,19 +23,20 @@ h1 {
 }
 
 .curriculum-map {
-    display: flex;
-    flex-wrap: wrap;
+    display: flex; /* Esencial para el diseño horizontal */
+    flex-wrap: wrap; /* Permite que los años se ajusten en varias líneas si la pantalla es pequeña */
     gap: 20px;
     justify-content: center;
 }
 
 .year {
-    flex: 1; /* Permite que los años se distribuyan de forma equitativa */
-    min-width: 250px;
+    flex: 1 1 250px; /* Distribuye los años de forma equitativa con un mínimo de 250px */
     background-color: #f7f3f9; /* Morado muy claro */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column; /* Asegura que los semestres se apilen verticalmente dentro del año */
 }
 
 .year h2 {
@@ -71,7 +72,8 @@ h1 {
     transition: background-color 0.3s ease, transform 0.2s ease, text-decoration 0.3s ease;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-weight: bold; /* Añadido para que el texto resalte más */
+    font-weight: bold;
+    user-select: none; /* Evita la selección de texto */
 }
 
 .course.unlocked {
