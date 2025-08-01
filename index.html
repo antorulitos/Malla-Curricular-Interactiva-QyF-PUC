@@ -1,117 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malla Curricular: Química y Farmacia</title>
-    <link rel="stylesheet" href="styles.css?v=2">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Malla Curricular QyF</title>
+  <link rel="stylesheet" href="estilos.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>Malla Curricular Interactiva: Química y Farmacia</h1>
-        <div class="curriculum-map">
-            <div class="year">
-                <h2>Primer Año</h2>
-                <div class="semester">
-                    <h3>I Semestre</h3>
-                    <div class="course" id="quimica-general-i" data-prerequisites="" data-opens="quimica-general-ii">Química General I</div>
-                    <div class="course" id="lab-quimica-general" data-prerequisites="" data-opens="quimica-general-ii">Laboratorio de Química General</div>
-                    <div class="course" id="introduccion-ciencias-farmaceuticas" data-prerequisites="">Introducción a las Ciencias Farmacéuticas</div>
-                    <div class="course" id="mundo-medicamentos" data-prerequisites="" data-opens="botanica-farmacognosia">Mundo de los Medicamentos</div>
-                    <div class="course" id="precalculo" data-prerequisites="" data-opens="calculo-i">Precálculo</div>
-                    <div class="course" id="filosofia" data-prerequisites="">Filosofía: ¿Para Qué?</div>
-                </div>
-                <div class="semester">
-                    <h3>II Semestre</h3>
-                    <div class="course locked" id="quimica-general-ii" data-prerequisites="quimica-general-i,lab-quimica-general" data-opens="quimica-organica-i,botanica-farmacognosia,quimica-analitica-i,quimica-fisica">Química General II</div>
-                    <div class="course" id="fisica-ciencias" data-prerequisites="" data-opens="quimica-fisica">Física para Ciencias</div>
-                    <div class="course locked" id="calculo-i" data-prerequisites="precalculo" data-opens="estadistica-quimica-farmacia,quimica-fisica">Cálculo I</div>
-                    <div class="course" id="electivo-1-1" data-prerequisites="">Electivo</div>
-                    <div class="course" id="electivo-1-2" data-prerequisites="">Electivo</div>
-                </div>
-            </div>
-
-            <div class="year">
-                <h2>Segundo Año</h2>
-                <div class="semester">
-                    <h3>III Semestre</h3>
-                    <div class="course locked" id="quimica-organica-i" data-prerequisites="quimica-general-ii" data-opens="quimica-organica-ii">Química Orgánica I</div>
-                    <div class="course locked" id="botanica-farmacognosia" data-prerequisites="mundo-medicamentos,quimica-general-ii">Botánica y Farmacognosia</div>
-                    <div class="course locked" id="estadistica-quimica-farmacia" data-prerequisites="calculo-i" data-opens="quimica-analitica-i">Estadística para Química y Farmacia</div>
-                    <div class="course" id="biologia-celula" data-prerequisites="" data-opens="fisiologia">Biología de la Célula</div>
-                    <div class="course" id="electivo-2-1" data-prerequisites="">Electivo</div>
-                </div>
-                <div class="semester">
-                    <h3>IV Semestre</h3>
-                    <div class="course locked" id="quimica-organica-ii" data-prerequisites="quimica-organica-i" data-opens="lab-quimica-organica,bioquimica">Química Orgánica II</div>
-                    <div class="course locked" id="quimica-analitica-i" data-prerequisites="quimica-general-ii,estadistica-quimica-farmacia" data-opens="analisis-instrumental">Química Analítica I</div>
-                    <div class="course locked" id="fisiologia" data-prerequisites="biologia-celula" data-opens="microbiologia-inmunologia,fisiopatologia">Fisiología</div>
-                    <div class="course" id="electivo-teologico" data-prerequisites="">Electivo Teológico</div>
-                    <div class="course" id="electivo-2-2" data-prerequisites="">Electivo</div>
-                </div>
-            </div>
-
-            <div class="year">
-                <h2>Tercer Año</h2>
-                <div class="semester">
-                    <h3>V Semestre</h3>
-                    <div class="course locked" id="lab-quimica-organica" data-prerequisites="quimica-organica-ii" data-opens="farmaco-quimica-i">Laboratorio de Química Orgánica</div>
-                    <div class="course locked" id="bioquimica" data-prerequisites="quimica-organica-ii" data-opens="microbiologia-inmunologia,farmacologia-i,bioquimica-clinica">Bioquímica</div>
-                    <div class="course locked" id="quimica-fisica" data-prerequisites="quimica-general-ii,fisica-ciencias,calculo-i" data-opens="farmaco-quimica-i,farmacocinetica-biofarmacia,bioquimica-clinica">Química-Física</div>
-                    <div class="course locked" id="analisis-instrumental" data-prerequisites="quimica-analitica-i" data-opens="tecnologia-farmaceutica-i">Análisis Instrumental</div>
-                    <div class="course locked" id="fisiopatologia" data-prerequisites="fisiologia" data-opens="farmacologia-i,bioquimica-clinica">Fisiopatología</div>
-                </div>
-                <div class="semester">
-                    <h3>VI Semestre</h3>
-                    <div class="course locked" id="microbiologia-inmunologia" data-prerequisites="fisiologia,bioquimica" data-opens="">Microbiología e Inmunología</div>
-                    <div class="course locked" id="farmaco-quimica-i" data-prerequisites="lab-quimica-organica,quimica-fisica" data-opens="farmaco-quimica-ii,farmacia-clinica,legislacion-deontologia">Fármaco-Química I</div>
-                    <div class="course locked" id="farmacocinetica-biofarmacia" data-prerequisites="quimica-fisica" data-opens="tecnologia-farmaceutica-i">Farmacocinética y Bio-farmacia</div>
-                    <div class="course locked" id="farmacologia-i" data-prerequisites="bioquimica,fisiopatologia" data-opens="farmaco-quimica-ii,farmacologia-ii,salud-publica">Farmacología I</div>
-                    <div class="course" id="electivo-3-1" data-prerequisites="">Electivo</div>
-                </div>
-            </div>
-
-            <div class="year">
-                <h2>Cuarto Año</h2>
-                <div class="semester">
-                    <h3>VII Semestre</h3>
-                    <div class="course locked" id="farmaco-quimica-ii" data-prerequisites="farmaco-quimica-i,farmacologia-i" data-opens="farmaco-quimica-iii,internado-clinico,farmacia-privada,practica-profesional-ii">Fármaco-Química II</div>
-                    <div class="course locked" id="tecnologia-farmaceutica-i" data-prerequisites="analisis-instrumental,farmacocinetica-biofarmacia" data-opens="practica-profesional-i,tecnologia-farmaceutica-ii">Tecnología Farmacéutica I</div>
-                    <div class="course locked" id="farmacologia-ii" data-prerequisites="farmacologia-i" data-opens="farmacia-clinica,farmacologia-iii">Farmacología II</div>
-                    <div class="course locked" id="bioquimica-clinica" data-prerequisites="bioquimica,quimica-fisica,fisiopatologia" data-opens="">Bioquímica Clínica</div>
-                    <div class="course" id="electivo-4-1" data-prerequisites="">Electivo</div>
-                </div>
-                <div class="semester">
-                    <h3>VIII Semestre</h3>
-                    <div class="course" id="toxicologia" data-prerequisites="">Toxicología</div>
-                    <div class="course" id="tesis-grado" data-prerequisites="">Tesis de Grado</div>
-                </div>
-            </div>
-
-            <div class="year">
-                <h2>Quinto Año</h2>
-                <div class="semester">
-                    <h3>IX Semestre</h3>
-                    <div class="course locked" id="farmaco-quimica-iii" data-prerequisites="farmaco-quimica-ii" data-opens="">Fármaco-Química III</div>
-                    <div class="course locked" id="farmacia-clinica" data-prerequisites="farmaco-quimica-i,farmacologia-ii" data-opens="">Farmacia Clínica y Atención Farmacéutica</div>
-                    <div class="course locked" id="farmacologia-iii" data-prerequisites="farmacologia-ii" data-opens="internado-clinico">Farmacología III</div>
-                    <div class="course locked" id="tecnologia-farmaceutica-ii" data-prerequisites="tecnologia-farmaceutica-i" data-opens="practica-profesional-ii">Tecnología Farmacéutica II</div>
-                    <div class="course" id="optativo-profundizacion-1" data-prerequisites="">Optativo de Profundización</div>
-                    <div class="course locked" id="practica-profesional-i" data-prerequisites="tecnologia-farmaceutica-i" data-opens="">Práctica Profesional I</div>
-                </div>
-                <div class="semester">
-                    <h3>X Semestre</h3>
-                    <div class="course locked" id="salud-publica" data-prerequisites="farmacologia-i" data-opens="">Salud Pública para Química y Farmacia</div>
-                    <div class="course locked" id="internado-clinico" data-prerequisites="farmaco-quimica-ii,farmacologia-iii" data-opens="">Internado Clínico</div>
-                    <div class="course locked" id="farmacia-privada" data-prerequisites="farmaco-quimica-ii" data-opens="">Farmacia Privada</div>
-                    <div class="course locked" id="legislacion-deontologia" data-prerequisites="farmaco-quimica-i" data-opens="">Legislación y Deontología Farmacéutica</div>
-                    <div class="course" id="optativo-profundizacion-2" data-prerequisites="">Optativo de Profundización</div>
-                    <div class="course" id="optativo-profundizacion-3" data-prerequisites="">Optativo de Profundización</div>
-                    <div class="course locked" id="practica-profesional-ii" data-prerequisites="farmaco-quimica-ii,tecnologia-farmaceutica-ii" data-opens="">Práctica Profesional II</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="script.js?v=2"></script>
+  <h1>Malla Curricular - Química y Farmacia</h1>
+  <div id="malla" class="malla"></div>
+  <script src="script.js"></script>
 </body>
 </html>
