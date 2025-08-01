@@ -31,11 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Añadir el event listener para cada ramo
     courses.forEach(course => {
         course.addEventListener('click', () => {
-            // Solo se puede hacer clic en ramos desbloqueados y no completados
-            if (course.classList.contains('unlocked') && !course.classList.contains('completed')) {
+            if (course.classList.contains('unlocked')) {
                 completedCourses.add(course.id);
                 localStorage.setItem('completedCourses', JSON.stringify(Array.from(completedCourses)));
-
+                
                 // Actualizar el estado de todos los ramos para desbloquear los siguientes
                 courses.forEach(updateCourseState);
             }
