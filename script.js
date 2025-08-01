@@ -71,7 +71,6 @@ const estado = JSON.parse(localStorage.getItem("estadoRamos")) || {};
 
 function crearMalla() {
   const semestres = {};
-
   ramos.forEach(ramo => {
     if (!semestres[ramo.semestre]) semestres[ramo.semestre] = [];
     semestres[ramo.semestre].push(ramo);
@@ -108,13 +107,15 @@ function actualizarEstado() {
       div.classList.add("bloqueado");
     }
 
-    div.onclick = () => {
-      if (!aprobado && habilitado) {
+    if (!div.classList.contains("aprobado") && habilitado) {
+      div.onclick = () => {
         estado[ramo.id] = true;
         localStorage.setItem("estadoRamos", JSON.stringify(estado));
         actualizarEstado();
-      }
-    };
+      };
+    } else {
+      div.onclick = null;
+    }
   });
 }
 
