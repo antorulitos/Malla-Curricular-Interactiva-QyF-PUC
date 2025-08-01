@@ -30,7 +30,7 @@ h1 {
 }
 
 .year {
-    flex: 1;
+    flex: 1; /* Permite que los años se distribuyan de forma equitativa */
     min-width: 250px;
     background-color: #f7f3f9; /* Morado muy claro */
     padding: 20px;
@@ -71,12 +71,18 @@ h1 {
     transition: background-color 0.3s ease, transform 0.2s ease, text-decoration 0.3s ease;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: bold; /* Añadido para que el texto resalte más */
 }
 
 .course.unlocked {
     background-color: #4CAF50; /* Verde para desbloqueados */
     color: #fff;
     cursor: pointer;
+}
+
+.course.unlocked:hover {
+    background-color: #388E3C; /* Verde oscuro al pasar el ratón */
+    transform: translateY(-2px);
 }
 
 .course.completed {
